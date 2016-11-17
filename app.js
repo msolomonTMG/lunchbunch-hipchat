@@ -11,6 +11,7 @@ var app = express();
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
 app.post('/api/v1/webhook', function(req, res) {
   let room = request.body.item.room.id
