@@ -1,11 +1,10 @@
 'use strict';
 
 const
+  bodyParser = require('body-parser'),
   config = require('config'),
-  crypto = require('crypto'),
   express = require('express'),
   algolia = require('./algolia'),
-  https = require('https'),
   request = require('request');
 
 var app = express();

@@ -23,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/msolomonTMG/lunchbunch-hipchat/issues"
   },
-  "homepage": "https://github.com/msolomonTMG/lunchbunch-hipchat#readme"
+  "homepage": "https://github.com/msolomonTMG/lunchbunch-hipchat#readme",
+  "dependencies": {
+    "algoliasearch": "^3.19.1",
+    "algoliasearch-helper": "^2.14.0",
+    "body-parser": "^1.15.2",
+    "config": "^1.24.0",
+    "express": "^4.14.0",
+    "request": "^2.78.0"
+  }
 }
