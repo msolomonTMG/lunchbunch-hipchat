@@ -11,9 +11,11 @@ var app = express();
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-app.use(bodyParser.json());
 
-app.post('/api/v1/webhook', function(req, res) {
+// create application/json parser
+var jsonParser = bodyParser.json()
+
+app.post('/api/v1/webhook', jsonParser, function(req, res) {
   let room = request.body.item.room.id
   let query = request.body.item.message.message.split('/lunchbunch ')[1]
 
