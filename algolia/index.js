@@ -13,7 +13,7 @@ const ALGOLIA_API_KEY = (process.env.ALGOLIA_API_KEY) ?
 
 // Search variables
 var
-  algolia = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY, ALGOLIA_PARAMS),
+  algolia = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY),
   algoliaHelper = algoliasearchHelper(algolia, 'thrillist-venues', {
     facets: ['node_type', 'is_promoted']
   });
