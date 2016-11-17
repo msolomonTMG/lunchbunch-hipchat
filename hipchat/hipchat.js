@@ -1,11 +1,6 @@
-
-
-// Search variables
-var
-  algolia = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY, ALGOLIA_PARAMS),
-  algoliaHelper = algoliasearchHelper(algolia, 'thrillist-venues', {
-    facets: ['node_type', 'is_promoted']
-  });
+const HIPCHAT_AUTH_TOKEN = (process.env.HIPCHAT_AUTH_TOKEN) ?
+  (process.env.HIPCHAT_AUTH_TOKEN) :
+  config.get('hipchatAuthToken');
 
 var functions = {
   /*
@@ -16,16 +11,14 @@ var functions = {
     "message_format": "text"
   }
   */
-  buildResponse: function(venue) {
-    return new Promise(function(resolve, reject) {
-      let response = {
-        "color": "green",
-        "message": "It's going to be sunny tomorrow! (yey)",
-        "notify": false,
-        "message_format": "text"
-      }
-      return resolve(response)
-    })
+  sendMessage: function(room, venue) {
+    let message = {
+      "color": "green",
+      "message": "It's going to be sunny tomorrow! (yey)",
+      "notify": false,
+      "message_format": "text"
+    }
+    let url = `https://thrillistmediagroup.hipchat.com/v2/room/${room}/notification?auth_token=${HIPCHAT_AUTH_TOKEN}`
   }
 }
 

@@ -11,11 +11,6 @@ const ALGOLIA_API_KEY = (process.env.ALGOLIA_API_KEY) ?
   (process.env.ALGOLIA_API_KEY) :
   config.get('algoliaApiKey');
 
-const ALGOLIA_PARAMS = {hitsPerPage: 2};
-
-// we're not going to trust things from wit unless we're  sure that the user wanted to add them
-const CONFIDENCE_THRESHOLD = .5;
-
 // Search variables
 var
   algolia = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY, ALGOLIA_PARAMS),
