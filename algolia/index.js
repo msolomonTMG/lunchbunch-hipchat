@@ -25,7 +25,7 @@ var functions = {
       query = ''
       algoliaHelper.addFacetRefinement('is_promoted', 'true');
       algoliaHelper.addFacetRefinement('node_type', 'venue');
-      algoliaHelper.setQuery(query).search();
+      algoliaHelper.search();
       algoliaHelper.on('result', function(content) {
         console.log('got results...')
         return resolve(content.hits);
