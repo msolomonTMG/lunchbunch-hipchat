@@ -21,7 +21,6 @@ var
 var functions = {
   search: function() {
     return new Promise(function(resolve, reject) {
-      query = ''
       algoliaHelper.addFacetRefinement('is_promoted', 'true');
       algoliaHelper.addFacetRefinement('node_type', 'venue');
       algoliaHelper.search();
