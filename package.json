@@ -1,0 +1,27 @@
+{
+  "name": "lunchbunch-hipchat",
+  "version": "1.0.0",
+  "description": "recommend places to eat near the office",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msolomonTMG/lunchbunch-hipchat.git"
+  },
+  "keywords": [
+    "recommendation",
+    "hipchat",
+    "food",
+    "thrillist",
+    "bot",
+    "tool"
+  ],
+  "author": "Mike Solomon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/msolomonTMG/lunchbunch-hipchat/issues"
+  },
+  "homepage": "https://github.com/msolomonTMG/lunchbunch-hipchat#readme"
+}
