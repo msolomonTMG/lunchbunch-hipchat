@@ -14,6 +14,8 @@ var functions = {
   }
   */
   sendMessage: function(room, venue) {
+    console.log('sending message to room')
+    console.log(room)
     let message = {
       "color": "green",
       "message": "It's going to be sunny tomorrow! (yey)",
