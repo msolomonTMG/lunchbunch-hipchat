@@ -16,8 +16,8 @@ app.use(express.static('public'));
 var jsonParser = bodyParser.json()
 
 app.post('/api/v1/webhook', jsonParser, function(req, res) {
-  let room = request.body.item.room.id
-  let query = request.body.item.message.message.split('/lunchbunch ')[1]
+  let room = req.body.item.room.id
+  let query = req.body.item.message.message.split('/lunchbunch ')[1]
 
   algolia.search(query).then(venues => {
     let randomVenue = venues[Math.floor(Math.random() * venues.length)]
