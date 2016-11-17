@@ -22,7 +22,7 @@ app.post('/api/v1/webhook', jsonParser, function(req, res) {
   console.log(room)
   console.log(query)
 
-  algolia.search(query).then(venues => {
+  algolia.search().then(venues => {
     let randomVenue = venues[Math.floor(Math.random() * venues.length)]
     hipchat.sendMessage(room, randomVenue).then(response => {
       res.sendStatus(200)

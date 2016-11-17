@@ -19,7 +19,7 @@ var
   });
 
 var functions = {
-  search: function(query) {
+  search: function() {
     return new Promise(function(resolve, reject) {
       query = ''
       algoliaHelper.addFacetRefinement('is_promoted', 'true');
