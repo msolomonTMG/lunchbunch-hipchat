@@ -23,7 +23,7 @@ app.post('/api/v1/webhook', jsonParser, function(req, res) {
     let randomVenue = venues[Math.floor(Math.random() * venues.length)]
     hipchat.sendMessage(room, randomVenue);
   })
-
+  res.sendStatus(200)
 });
 
 app.listen(app.get('port'), function() {
