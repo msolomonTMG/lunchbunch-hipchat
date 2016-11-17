@@ -21,9 +21,14 @@ app.post('/api/v1/webhook', jsonParser, function(req, res) {
 
   algolia.search(query).then(venues => {
     let randomVenue = venues[Math.floor(Math.random() * venues.length)]
-    hipchat.sendMessage(room, randomVenue);
+    hipchat.sendMessage(room, randomVenue).then(response => {
+      res.sendStatus(200)
+    }).catch(err => {
+      res.sendStatus(500)
+    })
+  }).catch(err => {
+    res.sendStatus(500)
   })
-  res.sendStatus(200)
 });
 
 app.listen(app.get('port'), function() {
