@@ -41,7 +41,7 @@ app.post('/api/v1/webhook', function(req, res) {
         })
       } else {
         let randomVenue = venues[Math.floor(Math.random() * venues.length)]
-        hipchat.sendMessage(room, randomVenue).then(response => {
+        hipchat.sendRecommendation(room, randomVenue).then(response => {
           res.sendStatus(200)
         }).catch(err => {
           res.send(err)

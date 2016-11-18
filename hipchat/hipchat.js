@@ -1,3 +1,5 @@
+'use strict';
+
 const request = require('request');
 
 const HIPCHAT_AUTH_TOKEN = (process.env.HIPCHAT_AUTH_TOKEN) ?
@@ -55,7 +57,7 @@ var helpers = {
 }
 
 var functions = {
-  sendMessage: function(room, venue) {
+  sendRecommendation: function(room, venue) {
     return new Promise(function(resolve, reject) {
 
       let card = helpers.buildCard(venue)

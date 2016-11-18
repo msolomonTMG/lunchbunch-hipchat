@@ -1,7 +1,7 @@
 var hipchat = require('./hipchat')
 
 module.exports = {
-  sendMessage: hipchat.sendMessage,
+  sendRecommendation: hipchat.sendRecommendation,
   sendNoResults: hipchat.sendNoResults,
   sendHelp: hipchat.sendHelp
 }
