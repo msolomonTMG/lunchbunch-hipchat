@@ -15,17 +15,20 @@ const ALGOLIA_API_KEY = (process.env.ALGOLIA_API_KEY) ?
 var
   algolia = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY),
   algoliaHelper = algoliasearchHelper(algolia, 'thrillist_venue', {
-    facets: ['node_type', 'is_promoted']
+    facets: ['node_type', 'is_promoted', 'is_open']
   });
 
+algoliaHelper.addFacetRefinement('is_promoted', 'true');
+algoliaHelper.addFacetRefinement('node_type', 'venue');
+algoliaHelper.addFacetRefinement('is_open', 1);
+
 var functions = {
-  search: function() {
+  search: function(query) {
     return new Promise(function(resolve, reject) {
-      algoliaHelper.addFacetRefinement('is_promoted', 'true');
-      algoliaHelper.addFacetRefinement('node_type', 'venue');
-      algoliaHelper.search();
+      algoliaHelper.setQueryParameter('aroundLatLng', '40.7243127, -73.9995254');
+      algoliaHelper.setQueryParameter('aroundRadius', 1000);
+      algoliaHelper.setQuery(query).search();
       algoliaHelper.on('result', function(content) {
-        console.log('got results...')
         return resolve(content.hits);
        });
       algoliaHelper.on('error', function (error) {
