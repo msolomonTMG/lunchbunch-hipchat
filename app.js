@@ -14,6 +14,29 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
+app.get('/api/v1/capabilities', function(req, res) {
+  res.json({
+    "name": "Lunchbunch",
+    "description": "Find the best places to eat near you",
+    "key": "com.thrillist.lunchbunch",
+    "links": {
+      "homepage": "http://lunchbunch-hipchat.herokuapp.com/",
+      "self": "http://lunchbunch-hipchat.herokuapp.com/api/v1/capabilities"
+    },
+    "capabilities": {
+      "hipchatApiConsumer": {
+        "scopes": [
+          "send_notification"
+        ]
+      }
+    },
+    "vendor": {
+      "name": "Thrillist",
+      "url": "https://www.thrillist.com"
+    }
+  })
+})
+
 app.post('/api/v1/webhook', function(req, res) {
   let room = req.body.item.room.id
   let command = req.body.item.message.message
