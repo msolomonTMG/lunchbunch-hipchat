@@ -53,7 +53,7 @@ app.post('/api/v1/webhook', function(req, res) {
             res.sendStatus(500)
           })
         } else {
-          search(room, query)
+          search(roomSettings, query)
         }
       })
     break;
@@ -78,8 +78,8 @@ app.post('/api/v1/webhook', function(req, res) {
     })
   }
 
-  function search(room, query) {
-    algolia.search(query).then(venues => {
+  function search(roomSettings, query) {
+    algolia.search(roomSettings, query).then(venues => {
       if (venues.length === 0) {
         hipchat.sendNoResults(room).then(response => {
           res.sendStatus(200)

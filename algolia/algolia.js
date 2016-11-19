@@ -23,9 +23,13 @@ algoliaHelper.addFacetRefinement('node_type', 'venue');
 algoliaHelper.addFacetRefinement('is_open', 1);
 
 var functions = {
-  search: function(query) {
+  search: function(roomSettings, query) {
     return new Promise(function(resolve, reject) {
-      algoliaHelper.setQueryParameter('aroundLatLng', '40.7243127, -73.9995254');
+      let lat = roomSettings._geolocation.coordinates[0]
+      let lng = roomSettings._geolocation.coordinates[1]
+      let coordinates = `${lat}, ${lng}`
+
+      algoliaHelper.setQueryParameter('aroundLatLng', coordinates);
       algoliaHelper.setQueryParameter('aroundRadius', 1000);
       algoliaHelper.setQuery(query).search();
       algoliaHelper.on('result', function(content) {
