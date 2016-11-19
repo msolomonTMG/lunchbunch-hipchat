@@ -63,7 +63,6 @@ var functions = {
           }
         }
         stamplay.Object('room').patch(room._id, data, function(err, res) {
-          console.log(res)
           return resolve(res)
         })
       })
