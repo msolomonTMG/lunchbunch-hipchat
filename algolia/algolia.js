@@ -1,3 +1,5 @@
+'use strict';
+
 const
   algoliasearch = require('algoliasearch'),
   algoliasearchHelper = require('algoliasearch-helper'),
