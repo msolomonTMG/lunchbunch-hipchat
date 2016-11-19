@@ -6,7 +6,8 @@ const
   express = require('express'),
   algolia = require('./algolia'),
   hipchat = require('./hipchat'),
-  request = require('request');
+  request = require('request'),
+  capabilities = require('./capabilities.json');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -15,26 +16,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.get('/api/v1/capabilities', function(req, res) {
-  res.json({
-    "name": "Lunchbunch",
-    "description": "Find the best places to eat near you",
-    "key": "com.thrillist.lunchbunch",
-    "links": {
-      "homepage": "http://lunchbunch-hipchat.herokuapp.com/",
-      "self": "http://lunchbunch-hipchat.herokuapp.com/api/v1/capabilities"
-    },
-    "capabilities": {
-      "hipchatApiConsumer": {
-        "scopes": [
-          "send_notification"
-        ]
-      }
-    },
-    "vendor": {
-      "name": "Thrillist",
-      "url": "https://www.thrillist.com"
-    }
-  })
+  res.json(capabilities)
 })
 
 app.post('/api/v1/webhook', function(req, res) {

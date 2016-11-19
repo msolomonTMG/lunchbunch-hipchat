@@ -1,0 +1,20 @@
+{
+  "name": "Lunchbunch",
+  "description": "Find the best places to eat near you",
+  "key": "com.thrillist.lunchbunch",
+  "links": {
+    "homepage": "http://lunchbunch-hipchat.herokuapp.com/",
+    "self": "http://lunchbunch-hipchat.herokuapp.com/api/v1/capabilities"
+  },
+  "capabilities": {
+    "hipchatApiConsumer": {
+      "scopes": [
+        "send_notification"
+      ]
+    }
+  },
+  "vendor": {
+    "name": "Thrillist",
+    "url": "https://www.thrillist.com"
+  }
+}
