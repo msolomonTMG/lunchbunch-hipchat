@@ -24,7 +24,12 @@ var helpers = {
                 data.results[0].geometry.location.lat,
                 data.results[0].geometry.location.lng
               ]
-              return resolve(coordinates)
+              let address = data.results[0].formatted_address
+              let result = {
+                coordinates: coordinates,
+                address: address
+              }
+              return resolve(result)
             } else {
               return reject(response)
             }
@@ -59,8 +64,9 @@ var functions = {
         let data = {
           _geolocation: {
             type: "Point",
-            coordinates: geocodedAddress
-          }
+            coordinates: geocodedAddress.coordinates
+          },
+          address: geocodedAddress.address
         }
         stamplay.Object('room').patch(room._id, data, function(err, res) {
           return resolve(res)
