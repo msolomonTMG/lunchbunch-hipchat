@@ -17,12 +17,13 @@ const ALGOLIA_API_KEY = (process.env.ALGOLIA_API_KEY) ?
 var
   algolia = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY),
   algoliaHelper = algoliasearchHelper(algolia, 'thrillist_venue', {
-    facets: ['node_type', 'is_promoted', 'is_open']
+    facets: ['node_type', 'is_promoted', 'is_open', 'vertical']
   });
 
 algoliaHelper.addFacetRefinement('is_promoted', 'true');
 algoliaHelper.addFacetRefinement('node_type', 'venue');
 algoliaHelper.addFacetRefinement('is_open', 1);
+algoliaHelper.addFacetRefinement('vertical', 'Eat');
 
 var functions = {
   search: function(roomSettings, query) {
