@@ -1,3 +1,5 @@
+'use strict';
+
 var Stamplay = require('stamplay')
 const request = require('request')
 
