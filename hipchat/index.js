@@ -2,8 +2,7 @@ var hipchat = require('./hipchat')
 
 module.exports = {
   askForLocation: hipchat.askForLocation,
-  sendAddressSuccessMessage: hipchat.sendAddressSuccessMessage,
-  sendRangeSuccessMessage: hipchat.sendRangeSuccessMessage,
+  sendSuccessMessage: hipchat.sendSuccessMessage,
   sendRecommendation: hipchat.sendRecommendation,
   sendNoResults: hipchat.sendNoResults,
   sendHelp: hipchat.sendHelp

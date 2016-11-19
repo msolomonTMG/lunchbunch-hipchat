@@ -72,26 +72,20 @@ var functions = {
       })
     })
   },
-  sendRangeSuccessMessage: function(room) {
+  sendSuccessMessage: function(room, type) {
     return new Promise(function(resolve, reject) {
-      let message = {
-        "color": "green",
-        "message": "The range for this room has been set! You can always update it by using '/lunchbunch --range number of miles here'",
-        "notify": false,
-        "message_format": "text"
+      let text;
+      switch(type) {
+        case 'address':
+          text = "Your address has been saved! Go ahead and ask for some random places near you using '/lunchbunch' or look for specific places like this: '/lunchbunch pizza'. You can always update your address by using '/lunchbunch --address your address here'"
+        break;
+        case 'range':
+          text = "The range for this room has been set! You can always update it by using '/lunchbunch --range number of miles here'"
+        break;
       }
-      helpers.sendMessage(room, message).then(success => {
-        return resolve(sucess)
-      }).catch(err => {
-        return reject(err)
-      })
-    })
-  },
-  sendAddressSuccessMessage: function(room) {
-    return new Promise(function(resolve, reject) {
       let message = {
         "color": "green",
-        "message": "Your address has been saved! Go ahead and ask for some random places near you using '/lunchbunch' or look for specific places like this: '/lunchbunch pizza'. You can always update your address by using '/lunchbunch --address your address here'",
+        "message": text,
         "notify": false,
         "message_format": "text"
       }

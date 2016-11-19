@@ -118,7 +118,7 @@ app.post('/api/v1/webhook', function(req, res) {
   function setAddress(room, address) {
     getRoomSettings(room).then(roomSettings => {
       stamplay.setRoomLocation(roomSettings, address).then(response => {
-        hipchat.sendAddressSuccessMessage(room).then(success => {
+        hipchat.sendSuccessMessage(room, 'address').then(success => {
           res.sendStatus(200)
         }).catch(err => {
           res.sendStatus(500)
@@ -130,13 +130,12 @@ app.post('/api/v1/webhook', function(req, res) {
   }
 
   function setRange(room, range) {
-    console.log('setting range')
     let rangeInt = parseInt(range)
     let rangeInMiles = rangeInt * 1609.34 // convert miles to meters
 
     getRoomSettings(room).then(roomSettings => {
       stamplay.setRoomRange(roomSettings, rangeInMiles).then(response => {
-        hipchat.sendRangeSuccessMessage(room).then(success => {
+        hipchat.sendSuccessMessage(room, 'range').then(success => {
           res.sendStatus(200)
         }).catch(err => {
           res.sendStatus(500)
