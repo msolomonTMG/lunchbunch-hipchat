@@ -100,10 +100,12 @@ app.post('/api/v1/webhook', function(req, res) {
   }
 
   function showHelp(room) {
-    hipchat.sendHelp(room).then(response => {
-      res.sendStatus(200)
-    }).catch(err => {
-      res.sendStatus(500)
+    getRoomSettings(room).then(roomSettings => {
+      hipchat.sendHelp(roomSettings).then(response => {
+        res.sendStatus(200)
+      }).catch(err => {
+        res.sendStatus(500)
+      })
     })
   }
 

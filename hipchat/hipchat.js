@@ -93,7 +93,7 @@ var functions = {
       let card = helpers.buildCard(venue)
 
       let message = {
-        "color": "green",
+        "color": "gray",
         "message": "It's going to be sunny tomorrow! (yey)",
         "notify": false,
         "message_format": "text",
@@ -123,11 +123,11 @@ var functions = {
       })
     })
   },
-  sendHelp: function(room) {
+  sendHelp: function(roomSettings) {
     return new Promise(function(resolve, reject) {
       let message = {
-        "color": "yellow",
-        "message": "Here are some tips for using lunchbunch:\
+        color: "gray",
+        message: "Here are some tips for using lunchbunch:\
         <table>\
           <tr><th>Command</th><th>Result</th></tr>\
           <tr><td>/lunchbunch</td><td>search for a random place</td></tr>\
@@ -135,11 +135,15 @@ var functions = {
           <tr><td>/lunchbunch --address <em>address</em></td><td>set the address for this room. I'll look for places around here</td></tr>\
           <tr><td>/lunchbunch --help</td><td>bring up this menu</td></tr>\
         </table>",
-        "notify": false,
-        "message_format": "html"
+        notify: false,
+        message_format: "html"
       }
 
-      helpers.sendMessage(room, message).then(success => {
+      if (roomSettings.address) {
+        message.message += `The address for this room is currently set to ${roomSettings.address}`
+      }
+
+      helpers.sendMessage(roomSettings.number, message).then(success => {
         return resolve(success)
       }).catch(err => {
         return reject(err)
