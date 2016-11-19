@@ -44,9 +44,10 @@ app.post('/api/v1/webhook', function(req, res) {
       setAddress(room, address)
     break;
     default:
+      console.log('conducting search')
       let query = req.body.item.message.message.split('/lunchbunch ')[1]
       getRoomSettings(room).then(roomSettings => {
-        if (!roomSettings.location) {
+        if (!roomSettings._geolocation) {
           hipchat.askForLocation(room).then(response => {
             res.sendStatus(200)
           }).catch(err => {
