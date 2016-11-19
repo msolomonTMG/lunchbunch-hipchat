@@ -72,6 +72,21 @@ var functions = {
       })
     })
   },
+  sendRangeSuccessMessage: function(room) {
+    return new Promise(function(resolve, reject) {
+      let message = {
+        "color": "green",
+        "message": "The range for this room has been set! You can always update it by using '/lunchbunch --range number of miles here'",
+        "notify": false,
+        "message_format": "text"
+      }
+      helpers.sendMessage(room, message).then(success => {
+        return resolve(sucess)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
   sendAddressSuccessMessage: function(room) {
     return new Promise(function(resolve, reject) {
       let message = {
@@ -111,7 +126,7 @@ var functions = {
     return new Promise(function(resolve, reject) {
       let message = {
         "color": "red",
-        "message": "I couldn't find any good spots. Try looking for something else.",
+        "message": "I couldn't find any good spots. Try looking for something else or try expanding your range by using '/lunchbunch --range number of miles'.",
         "notify": false,
         "message_format": "text"
       }
@@ -133,6 +148,7 @@ var functions = {
           <tr><td>/lunchbunch</td><td>search for a random place</td></tr>\
           <tr><td>/lunchbunch <em>search term</em></td><td>search for something</td></tr>\
           <tr><td>/lunchbunch --address <em>address</em></td><td>set the address for this room. I'll look for places around here</td></tr>\
+          <tr><td>/lunchbunch --range <em>number of miles</em></td><td>limit how far you're willing to go for food by entering the number of miles here. I'll only recommend places that are within this limit. I default to 1 mile.</td></tr>\
           <tr><td>/lunchbunch --help</td><td>bring up this menu</td></tr>\
         </table>",
         notify: false,

@@ -29,8 +29,13 @@ var functions = {
       let lng = roomSettings._geolocation.coordinates[1]
       let coordinates = `${lat}, ${lng}`
 
+      let searchRadius = 1609 //default to 1 mile or 1.609km
+      if (roomSettings.search_radius) {
+        searchRadius = roomSettings.search_radius
+      }
+
       algoliaHelper.setQueryParameter('aroundLatLng', coordinates);
-      algoliaHelper.setQueryParameter('aroundRadius', 1000);
+      algoliaHelper.setQueryParameter('aroundRadius', searchRadius);
       algoliaHelper.setQuery(query).search();
       algoliaHelper.on('result', function(content) {
         return resolve(content.hits);

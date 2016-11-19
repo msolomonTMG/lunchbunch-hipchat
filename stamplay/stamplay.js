@@ -46,15 +46,23 @@ var functions = {
   addRoom: function(roomNumber) {
     return new Promise(function(resolve, reject) {
       stamplay.Object('room').save({ number: roomNumber }, function(err, res) {
-        return resolve(res)
+        if (!err) {
+          return resolve(res)
+        } else {
+          return reject(err)
+        }
       })
     })
   },
   getRoom: function(roomNumber) {
     return new Promise(function(resolve, reject) {
       stamplay.Object('room').get({ number: roomNumber }, function(err, res) {
-        let firstResult = res.data[0]
-        return resolve(firstResult)
+        if (!err) {
+          let firstResult = res.data[0]
+          return resolve(firstResult)
+        } else {
+          return reject(err)
+        }
       })
     })
   },
@@ -69,8 +77,23 @@ var functions = {
           address: geocodedAddress.address
         }
         stamplay.Object('room').patch(room._id, data, function(err, res) {
-          return resolve(res)
+          if (!err) {
+            return resolve(res)
+          } else {
+            return reject(err)
+          }
         })
+      })
+    })
+  },
+  setRoomRange: function(room, range) {
+    return new Promise(function(resolve, reject) {
+      stamplay.Object('room').patch(room._id, { search_radius: range }, function(err, res) {
+        if (!err) {
+          return resolve(res)
+        } else {
+          return reject(err)
+        }
       })
     })
   }

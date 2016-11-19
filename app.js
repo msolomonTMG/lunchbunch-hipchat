@@ -23,8 +23,10 @@ app.get('/api/v1/capabilities', function(req, res) {
 function parseCommand(message) {
   if (message.match(/--address/)) {
     return 'address'
-  } else if(message.match(/--help/)) {
+  } else if (message.match(/--help/)) {
     return 'help'
+  } else if (message.match(/--range/)) {
+    return 'range'
   } else {
     return 'search'
   }
@@ -42,6 +44,10 @@ app.post('/api/v1/webhook', function(req, res) {
     case 'address':
       let address = message.split('--address ')[1]
       setAddress(room, address)
+    break;
+    case 'range':
+      let range = message.split('--range ')[1]
+      setRange(room, range)
     break;
     default:
       let query = req.body.item.message.message.split('/lunchbunch ')[1]
@@ -120,6 +126,24 @@ app.post('/api/v1/webhook', function(req, res) {
       })
     }).catch(err => {
       res.sendStatus(500)
+    })
+  }
+
+  function setRange(room, range) {
+    console.log('setting range')
+    let rangeInt = parseInt(range)
+    let rangeInMiles = rangeInt * 1609.34 // convert miles to meters
+
+    getRoomSettings(room).then(roomSettings => {
+      stamplay.setRoomRange(roomSettings, rangeInMiles).then(response => {
+        hipchat.sendRangeSuccessMessage(room).then(success => {
+          res.sendStatus(200)
+        }).catch(err => {
+          res.sendStatus(500)
+        })
+      }).catch(err => {
+        res.sendStatus(500)
+      })
     })
   }
 
