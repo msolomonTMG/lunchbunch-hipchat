@@ -57,6 +57,36 @@ var helpers = {
 }
 
 var functions = {
+  askForLocation: function(room) {
+    return new Promise(function(resolve, reject) {
+      let message = {
+        "color": "yellow",
+        "message": "Enter your address like this '/lunchbunch --address your address here' and I'll search for places near you.",
+        "notify": false,
+        "message_format": "text"
+      }
+      helpers.sendMessage(room, message).then(response => {
+        return resolve(response)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
+  sendAddressSuccessMessage: function(room) {
+    return new Promise(function(resolve, reject) {
+      let message = {
+        "color": "green",
+        "message": "Your address has been saved! Go ahead and ask for some random places near you using '/lunchbunch' or look for specific places like this: '/lunchbunch pizza'. You can always update your address by using '/lunchbunch --address your address here'",
+        "notify": false,
+        "message_format": "text"
+      }
+      helpers.sendMessage(room, message).then(success => {
+        return resolve(sucess)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
   sendRecommendation: function(room, venue) {
     return new Promise(function(resolve, reject) {
 
