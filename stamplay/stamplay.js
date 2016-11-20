@@ -54,6 +54,22 @@ var functions = {
       })
     })
   },
+  addRoomByInstall: function(roomData) {
+    let data = {
+      number: roomData.roomId,
+      oauthId: roomData.oauthId,
+      oauthSecret: roomData.oauthSecret
+    }
+    return new Promise(function(resolve, reject) {
+      stamplay.Object('room').save(data, function(err, res) {
+        if (!err) {
+          return resolve(res)
+        }, else {
+          return reject(err)
+        }
+      })
+    })
+  },
   getRoom: function(roomNumber) {
     return new Promise(function(resolve, reject) {
       stamplay.Object('room').get({ number: roomNumber }, function(err, res) {
