@@ -45,7 +45,7 @@ app.get('/installed', function(req, res) {
             let headers = {
               'Content-Type': 'application/x-www-form-urlencoded'
             }
-            let dataString = 'grant_type=client_credentials&scope=send_message'
+            let dataString = 'grant_type=authorization_code&scope=send_message'
             let options = {
               url: parsedBody.capabilities.oauth2Provider.tokenUrl,
               method: 'POST',
@@ -60,14 +60,17 @@ app.get('/installed', function(req, res) {
               console.log('MAKING LAST REQUEST')
               console.log(body)
             })
+          } else {
+            res.sendStatus(500)
           }
         })
       }).catch(err => {
         console.log(err)
-        res.send(500)
+        res.sendStatus(500)
       })
     } else {
       console.log(response)
+      res.sendStatus(500)
     }
   });
 })
