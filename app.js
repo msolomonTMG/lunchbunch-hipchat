@@ -60,6 +60,9 @@ app.get('/installed', function(req, res) {
             })
           }
         })
+      }).catch(err => {
+        console.log(err)
+        res.send(500)
       })
     } else {
       console.log(response)

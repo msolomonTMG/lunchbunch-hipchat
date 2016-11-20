@@ -55,12 +55,13 @@ var functions = {
     })
   },
   addRoomByInstall: function(roomData) {
-    let data = {
-      number: roomData.roomId,
-      oauthId: roomData.oauthId,
-      oauthSecret: roomData.oauthSecret
-    }
     return new Promise(function(resolve, reject) {
+      let data = {
+        number: roomData.roomId,
+        oauthId: roomData.oauthId,
+        oauthSecret: roomData.oauthSecret
+      }
+      console.log(data)
       stamplay.Object('room').save(data, function(err, res) {
         if (!err) {
           return resolve(res)
