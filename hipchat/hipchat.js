@@ -1,5 +1,6 @@
 'use strict';
 
+const stamplay = require('../stamplay')
 const request = require('request');
 
 const HIPCHAT_AUTH_TOKEN = (process.env.HIPCHAT_AUTH_TOKEN) ?
@@ -7,6 +8,15 @@ const HIPCHAT_AUTH_TOKEN = (process.env.HIPCHAT_AUTH_TOKEN) ?
   config.get('hipchatAuthToken');
 
 var helpers = {
+  getHipchAuthToken: function(roomNumber) {
+    return new Promise(function(resolve, reject) {
+      stamplay.getRoom(roomNumber).then(room => {
+        return resolve(room.accessToken)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
   getCardText: function(venue) {
     let cardText;
     if (!venue.summary) {
@@ -39,18 +49,20 @@ var helpers = {
   },
   sendMessage: function(room, message) {
     return new Promise(function(resolve, reject) {
-      let url = `https://thrillistmediagroup.hipchat.com/v2/room/${room}/notification?auth_token=${HIPCHAT_AUTH_TOKEN}`
-      request.post(
-        url,
-        { json: message },
-        function (error, response, body) {
-          if (!error && response.statusCode == 200) {
-            return resolve(body)
-          } else {
-            return reject(response)
+      helpers.getHipchAuthToken(room).then(hipchatAuthToken => {
+        let url = `https://thrillistmediagroup.hipchat.com/v2/room/${room}/notification?auth_token=${hipchatAuthToken}`
+        request.post(
+          url,
+          { json: message },
+          function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              return resolve(body)
+            } else {
+              return reject(response)
+            }
           }
-        }
-      );
+        );
+      })
     })
   }
 
