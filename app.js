@@ -24,6 +24,49 @@ app.get('/configuration', function(req, res) {
   res.sendfile('./configuration.html');
 })
 
+app.get('/installed', function(req, res) {
+  console.log('GOT AN INSTALL')
+  console.log(req.query)
+  let installableUrl = req.query.installable_url
+  let redirectUrl = req.query.redirect_url
+  request.get(installableUrl, function (error, response, body) {
+    if (!error) {
+      console.log('FIRST CALL TO INSTALLABLE')
+      console.log(body)
+
+      stamplay.addRoomByInstall(body).then(newRoom => {
+        console.log('JUST MADE A NEW ROOM')
+        request.get(body.capabilitiesUrl, function(error, response, body) {
+          console.log('JUST MADE CALL TO CAPABILITIES')
+          console.log(body)
+          if (!error) {
+            let headers = {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+            let dataString = 'grant_type=client_credentials&scope=send_message'
+            let options = {
+              url: '<capabilities.oauth2Provider.tokenUrl>',
+              method: 'POST',
+              headers: headers,
+              body: dataString,
+              auth: {
+                'user': '<oauthid>',
+                'pass': '<oauthsecret>'
+              }
+            }
+            request(options, function(error, response, body) {
+              console.log('MAKING LAST REQUEST')
+              console.log(body)
+            })
+          }
+        })
+      })
+    } else {
+      console.log(response)
+    }
+  });
+})
+
 function parseCommand(message) {
   if (message.match(/--address/)) {
     return 'address'

@@ -11,6 +11,12 @@
       "scopes": [
         "send_notification"
       ]
+    },
+    "installable": {
+      "allowGlobal": false,
+      "allowRoom": true,
+      "installedUrl": "http://lunchbunch-hipchat.herokuapp.com/installed",
+      "updatedUrl": "http://lunchbunch-hipchat.herokuapp.com/updated"
     }
   },
   "vendor": {
