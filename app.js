@@ -33,8 +33,9 @@ app.get('/installed', function(req, res) {
     if (!error) {
       console.log('FIRST CALL TO INSTALLABLE')
       console.log(body)
+      let roomData = JSON.parse(body)
 
-      stamplay.addRoomByInstall(body).then(newRoom => {
+      stamplay.addRoomByInstall(roomData).then(newRoom => {
         console.log('JUST MADE A NEW ROOM')
         request.get(body.capabilitiesUrl, function(error, response, body) {
           console.log('JUST MADE CALL TO CAPABILITIES')
