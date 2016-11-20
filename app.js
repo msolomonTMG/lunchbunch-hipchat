@@ -45,7 +45,7 @@ app.get('/installed', function(req, res) {
             let headers = {
               'Content-Type': 'application/x-www-form-urlencoded'
             }
-            let dataString = 'grant_type=authorization_code&scope=send_message'
+            let dataString = 'grant_type=client_credentials&scope=send_notification'
             let options = {
               url: parsedBody.capabilities.oauth2Provider.tokenUrl,
               method: 'POST',
