@@ -11,7 +11,8 @@ var helpers = {
   getHipchAuthToken: function(roomNumber) {
     return new Promise(function(resolve, reject) {
       stamplay.getRoom(roomNumber).then(room => {
-        return resolve(room.accessToken)
+        //return resolve(room.accessToken)
+        return resolve(HIPCHAT_AUTH_TOKEN) // until we can configure this to be installable
       }).catch(err => {
         return reject(err)
       })

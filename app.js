@@ -24,6 +24,7 @@ app.get('/configuration', function(req, res) {
   res.sendfile('./configuration.html');
 })
 
+//TODO: clean this shit up and scope it so that this can fire on /lunchbunch
 app.get('/installed', function(req, res) {
   console.log('GOT AN INSTALL')
   console.log(req.query)
