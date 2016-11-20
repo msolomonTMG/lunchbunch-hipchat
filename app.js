@@ -37,7 +37,7 @@ app.get('/installed', function(req, res) {
 
       stamplay.addRoomByInstall(roomData).then(newRoom => {
         console.log('JUST MADE A NEW ROOM')
-        request.get(body.capabilitiesUrl, function(error, response, body) {
+        request.get(roomData.capabilitiesUrl, function(error, response, body) {
           console.log('JUST MADE CALL TO CAPABILITIES')
           console.log(body)
           if (!error) {
