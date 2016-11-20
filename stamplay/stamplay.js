@@ -64,7 +64,7 @@ var functions = {
       stamplay.Object('room').save(data, function(err, res) {
         if (!err) {
           return resolve(res)
-        }, else {
+        } else {
           return reject(err)
         }
       })
