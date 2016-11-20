@@ -40,19 +40,20 @@ app.get('/installed', function(req, res) {
         request.get(roomData.capabilitiesUrl, function(error, response, body) {
           console.log('JUST MADE CALL TO CAPABILITIES')
           console.log(body)
+          let parsedBody = JSON.parse(body)
           if (!error) {
             let headers = {
               'Content-Type': 'application/x-www-form-urlencoded'
             }
             let dataString = 'grant_type=client_credentials&scope=send_message'
             let options = {
-              url: '<capabilities.oauth2Provider.tokenUrl>',
+              url: parsedBody.capabilities.oauth2Provider.tokenUrl,
               method: 'POST',
               headers: headers,
               body: dataString,
               auth: {
-                'user': '<oauthid>',
-                'pass': '<oauthsecret>'
+                'user': roomData.oauthId,
+                'pass': roomData.oauthSecret
               }
             }
             request(options, function(error, response, body) {
