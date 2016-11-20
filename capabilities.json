@@ -16,5 +16,8 @@
   "vendor": {
     "name": "Thrillist",
     "url": "https://www.thrillist.com"
+  },
+  "configurable": {
+    "url": "http://lunchbunch-hipchat.herokuapp.com/configuration"
   }
 }

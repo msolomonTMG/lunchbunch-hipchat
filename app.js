@@ -20,6 +20,10 @@ app.get('/api/v1/capabilities', function(req, res) {
   res.json(capabilities)
 })
 
+app.get('/configuration', function(req, res) {
+  res.sendfile('./configuration.html');
+})
+
 function parseCommand(message) {
   if (message.match(/--address/)) {
     return 'address'
