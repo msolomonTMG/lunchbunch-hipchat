@@ -5,5 +5,6 @@ module.exports = {
   addRoomByInstall: stamplay.addRoomByInstall,
   getRoom: stamplay.getRoom,
   setRoomLocation: stamplay.setRoomLocation,
-  setRoomRange: stamplay.setRoomRange
+  setRoomRange: stamplay.setRoomRange,
+  updateRoom: stamplay.updateRoom
 }

@@ -113,6 +113,17 @@ var functions = {
         }
       })
     })
+  },
+  updateRoom: function(room, data) {
+    return new Promise(function(resolve, reject) {
+      stamplay.Object('room').patch(room._id, data, function(err, res) {
+        if (!err) {
+          return resolve(res)
+        } else {
+          return reject(err)
+        }
+      })
+    })
   }
 }
 

@@ -59,6 +59,10 @@ app.get('/installed', function(req, res) {
             request(options, function(error, response, body) {
               console.log('MAKING LAST REQUEST')
               console.log(body)
+              let parsedResponse = JSON.parse(body)
+              stamplay.updateRoom(newRoom, { accessToken: parsedResponse.access_token }).then(success => {
+                res.sendStatus(200)
+              })
             })
           } else {
             res.sendStatus(500)
